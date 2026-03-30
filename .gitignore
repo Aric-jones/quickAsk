@@ -1,0 +1,7 @@
+quick-ask-extension/marketing/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

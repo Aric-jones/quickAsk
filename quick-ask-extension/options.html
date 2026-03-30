@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Ask — Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="scene-bg"></div>
+  <div class="container">
+    <div class="header">
+      <div class="logo-mark">?</div>
+      <h1>Quick Ask</h1>
+      <p class="subtitle">配置你的 AI 服务</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">PROVIDER</div>
+      <h2>选择 AI 提供商</h2>
+      <p class="hint">国内平台大多有免费额度，推荐通义千问或智谱</p>
+
+      <div class="provider-group">
+        <div class="provider-section-label">国内 · 免费 / 极低价</div>
+        <div class="provider-grid" id="domestic-providers"></div>
+
+        <div class="provider-section-label">国际</div>
+        <div class="provider-grid" id="intl-providers"></div>
+      </div>
+    </div>
+
+    <div class="card" id="config-card" style="display:none;">
+      <div class="card-label">CONFIGURATION</div>
+      <h2>API 配置</h2>
+
+      <div class="form-group">
+        <label for="api-key">API Key</label>
+        <div class="key-input-wrapper">
+          <input type="password" id="api-key" placeholder="sk-xxxxxxxxxxxxxxxx" spellcheck="false">
+          <button class="toggle-eye" id="toggle-key" title="显示/隐藏">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <a class="key-link" id="key-link" href="#" target="_blank">获取 API Key ↗</a>
+      </div>
+
+      <div class="form-group">
+        <label for="model-select">模型</label>
+        <select id="model-select"></select>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" id="test-btn">测试连接</button>
+        <button class="btn btn-accent" id="save-btn">保存</button>
+      </div>
+
+      <div class="test-result" id="test-result"></div>
+    </div>
+
+    <div class="card tips-card">
+      <div class="card-label">USAGE</div>
+      <h2>使用方式</h2>
+      <ul>
+        <li>点击网页右下角悬浮球打开对话框</li>
+        <li>快捷键 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd></li>
+        <li>悬浮球可拖拽至任意位置</li>
+        <li>对话仅为即时解答，关闭后自动清除</li>
+      </ul>
+    </div>
+
+    <div class="footer-line">Quick Ask v1.0 · 数据仅存本地</div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
