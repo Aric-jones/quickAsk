@@ -20,6 +20,7 @@
   position: fixed;
   z-index: 2147483647;
   pointer-events: none;
+  isolation: isolate;
 }
 
 #quick-ask-root *,

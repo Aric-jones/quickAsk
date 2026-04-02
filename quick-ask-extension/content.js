@@ -98,6 +98,7 @@
   let isDragging = false;
   let dragStartX, dragStartY, ballStartX, ballStartY;
   let hasMoved = false;
+  let lastDockSide = null; // 保存上一次的吸附状态，用于关闭面板时恢复
 
   // 获取当前吸附边（用于持久化和窗口 resize 后恢复）
   function getDockSide() {
@@ -109,6 +110,7 @@
   // 清除吸附状态，让悬浮球回到自由拖拽态
   function clearDockSide() {
     ball.classList.remove('qa-docked-left', 'qa-docked-right');
+    ball.style.transform = '';
   }
 
   // 应用吸附状态并将球放到边缘参考位置（真实“露出”由 CSS translate 控制）
@@ -129,6 +131,7 @@
   function undockForDrag() {
     const side = getDockSide();
     if (!side) return;
+    lastDockSide = side; // 保存吸附状态
     clearDockSide();
     const rect = ball.getBoundingClientRect();
     const safeX = Math.max(EDGE_PADDING, Math.min(window.innerWidth - BALL_SIZE - EDGE_PADDING, rect.left));
@@ -292,9 +295,20 @@
       requestAnimationFrame(() => panel.classList.add('qa-visible'));
       checkConfig();
       inputEl.focus();
+      // 打开面板时清除吸附状态，让悬浮球完全显示
+      // 如果 lastDockSide 还没保存（在点击情况下），先保存
+      if (!lastDockSide) {
+        lastDockSide = getDockSide();
+      }
+      clearDockSide();
     } else {
       panel.classList.remove('qa-visible');
       panel.classList.add('qa-hidden');
+      // 关闭面板时恢复悬浮球吸附状态
+      if (lastDockSide) {
+        applyDockSide(lastDockSide);
+      }
+      lastDockSide = null;
     }
   }
 
